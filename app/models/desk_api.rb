@@ -13,7 +13,7 @@ class DeskApi
   
   def initialize(attributes = {})
     attributes.each do |name, value|
-      send("#{name}=", value)
+      instance_variable_set("@#{name}".to_sym, value)
     end
   end
   
@@ -59,7 +59,7 @@ class DeskApi
   
   def self.patch(path, attr)
     raise ApiHttpError "nothing" if attr.blank?  
-    resp = token.post(prefix + path, attr.to_json, HEADERS.merge! {"x-http-method-override" => "PATCH"})
+    resp = token.post(prefix + path, attr.to_json, HEADERS.merge!({"x-http-method-override" => "PATCH"}))
     
     raise ApiHttpError resp.code unless SUCCESS_STATUSES.include? resp.code.to_i
     JSON.parse(resp.body)

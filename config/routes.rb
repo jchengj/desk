@@ -1,4 +1,6 @@
 Desk::Application.routes.draw do
+  root :to => "cases#index"
+  
   resources :labels
   resources :filters do
     resources :cases
