@@ -1,8 +1,7 @@
 class Filter < DeskApi
-  attr_accessor :name
   
   def id
-    @_links["self"]["href"][/\d+$/]
+    data[_links]["self"]["href"][/\d+$/]
   end
   
   def self.query()

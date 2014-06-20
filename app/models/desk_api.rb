@@ -12,9 +12,7 @@ class DeskApi
   ##########################################################################
   
   def initialize(attributes = {})
-    attributes.each do |name, value|
-      instance_variable_set("@#{name}".to_sym, value)
-    end
+    @data = attributes
   end
   
   ##########################################################################
@@ -57,9 +55,9 @@ class DeskApi
   #
   ###########################################################################  
   
-  def self.patch(path, attr)
-    raise ApiHttpError "nothing" if attr.blank?  
-    resp = token.post(prefix + path, attr.to_json, HEADERS.merge!({"x-http-method-override" => "PATCH"}))
+  def self.patch(path, attributes)
+    raise ApiHttpError "nothing" if attributes.blank?  
+    resp = token.post(prefix + path, attributes.to_json, HEADERS.merge!({"x-http-method-override" => "PATCH"}))
     
     raise ApiHttpError resp.code unless SUCCESS_STATUSES.include? resp.code.to_i
     JSON.parse(resp.body)
@@ -74,9 +72,9 @@ class DeskApi
   # ApiHttpError is raised if response status is not 200
   #
   ###########################################################################  
-  def self.post(path, attr)
+  def self.post(path, attributes)
     token.post(prefix + path, attr, HEADERS) 
-    resp = token.post(prefix + path, attr.to_json, HEADERS) 
+    resp = token.post(prefix + path, attributes.to_json, HEADERS) 
     
     raise ApiHttpError resp.code unless SUCCESS_STATUSES.include? resp.code.to_i
     JSON.parse(resp.body) 
