@@ -1,12 +1,11 @@
 class LabelsController < ApplicationController
-  respond_to :html, :json
   
   def index
     @labels = Label.query()
-    respond_with @labels
   end
   
   def create
-    respond_with Label.create(params[:label])
+    Label.create(params.select {|k,v| Label::PARAM.include? k})
+    redirect_to labels_path, :notice => "Label created successfully"
   end
 end

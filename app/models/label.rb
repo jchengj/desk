@@ -1,5 +1,6 @@
 class Label < DeskApi
-  GROUP = 2
+  GROUP = 3
+  PARAM = ["name", "description"]
 
   def self.query()
     data = get("labels")
