@@ -1,7 +1,7 @@
 class DeskApi  
   class ApiHttpError < StandardError; end
   
-  HEADERS = { 'Accept'=>'application/xml', 'Content-Type' => 'application/xml' }
+  HEADERS = { 'Accept'=>'application/json', 'Content-Type' => 'application/json' }
   SUCCESS_STATUSES = [200, 201, 202, 204]
   
   ##########################################################################
@@ -13,6 +13,14 @@ class DeskApi
   
   def initialize(attributes = {})
     @data = attributes
+  end
+  
+  def method_missing(method_sym, *arguments, &block)
+    if arguments.blank? || block.blank?
+      @data[method_sym.to_s]
+    else
+      super
+    end
   end
   
   ##########################################################################
@@ -27,7 +35,6 @@ class DeskApi
     "#{DESK[:site]}/api/v#{DESK[:version]}/"
   end
   
-  
   ##########################################################################
   #
   # wrapper method for oauth get
@@ -35,7 +42,7 @@ class DeskApi
   # returns a hash of the response body
   #
   # Exceptions:
-  # ApiHttpError is raised if response status is not 200
+  # ApiHttpError is raised if response status is not 20x
   #
   ###########################################################################
   def self.get(path)
@@ -51,7 +58,7 @@ class DeskApi
   # receives a string path less the prefix and a hash object
   #
   # Exceptions:
-  # ApiHttpError is raised if response status is not 200
+  # ApiHttpError is raised if response status is not 20x
   #
   ###########################################################################  
   
@@ -69,7 +76,7 @@ class DeskApi
   # receives a string path less the prefix and a hash object
   #
   # Exceptions:
-  # ApiHttpError is raised if response status is not 200
+  # ApiHttpError is raised if response status is not 20x
   #
   ###########################################################################  
   def self.post(path, attributes)

@@ -1,6 +1,10 @@
 class Case < DeskApi
   def self.query(id)
-    get("filters/#{id.to_i.to_s}/cases")
+    data = get("filters/#{id.to_i.to_s}/cases")
+    return [] if data.blank? || data["_embedded"].blank? || data["_embedded"]["entries"].blank?
+
+    results = data["_embedded"]["entries"]
+    results.map {|r| Filter.new(r) }
   end
   
   def self.update(id, attributes)

@@ -1,7 +1,6 @@
 class User < DeskApi
-  
   def self.current_user
-    data = get("users/current_user") || {}
-    new User(data)
+    data = get("users/current") || {}
+    User.new(data)
   end
 end

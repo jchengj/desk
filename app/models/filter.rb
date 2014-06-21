@@ -1,7 +1,6 @@
 class Filter < DeskApi
-  
   def id
-    data[_links]["self"]["href"][/\d+$/]
+    @data["_links"]["self"]["href"][/\d+$/]
   end
   
   def self.query()

@@ -1,8 +1,7 @@
 class CasesController < ApplicationController
-  before_filter :current_user
+  respond_with :json
   
-  def index
-    @filters = Filter.query()
-    @cases = Case.query(@filters.first.id)
+  def update
+    respond_with Case.update(params[:labels])
   end
 end
