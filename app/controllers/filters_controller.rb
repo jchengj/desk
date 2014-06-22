@@ -1,8 +1,8 @@
 class FiltersController < ApplicationController
-  respond_to :html, :json
   
   def index
     @filters = Filter.query()
+    @labels = Label.query()
     
     unless @filters.blank?
       session[:filter_id] ||= @filters.first.id
@@ -12,8 +12,9 @@ class FiltersController < ApplicationController
   
   def show
     @cases = Case.query(params[:id])
+    @labels = Label.query()
     session[:filter_id] = params[:id]
     
-    respond_with @cases
+    render :partial => "cases" and return
   end
 end

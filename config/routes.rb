@@ -2,9 +2,8 @@ Desk::Application.routes.draw do
   root :to => "filters#index"
   
   resources :labels
-  resources :filters do
-    resources :cases
-  end
+  resources :filters
+  resources :cases
 
 
   # The priority is based upon order of creation:

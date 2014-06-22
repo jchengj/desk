@@ -1,22 +1,11 @@
-<div class="col-md-3">
+<div id="filters" class="col-md-3">
   <ul class="nav nav-pills nav-stacked">
     <% @filters.each do |f| %>
-       <li class="<%= current_filter(f.id) %>"><%= link_to f.name, "#" %><li>
+       <li class="<%= current_filter(f.id) %>"><%= link_to f.name, filter_path(f.id), class: "filter_link" %></li>
     <% end %>
   </ul>
 </div>
 
-<div class="col-md-9">
-  <div class="list-group">
-    <% if @cases.blank? %>
-      There is no case in this filter
-    <% else %>
-      <% @cases.each do |c| %>
-        <a href="" class="list-group-item">
-          <%= c.subject %>
-          <span class="glyphicon glyphicon-chevron-down pull-right"></span>
-        </a>
-      <% end %>
-    <% end %>
-  </div>
+<div id="filter_cases" class="col-md-9">
+  <%= render "cases" %>
 </div>

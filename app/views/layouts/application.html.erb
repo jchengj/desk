@@ -14,24 +14,7 @@
 </head>
 <body>
   <div id="container">
-
-    <nav class="navbar navbar-default" role="navigation">
-      <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">MyDesk</a>
-        </div>
-        <p class="navbar-text navbar-right">Signed in as <a href="#" class="navbar-link"><%= current_user.name %></a></p>
-        <button type="button" class="btn btn-default navbar-btn">Cases</button>
-        <button type="button" class="btn btn-default navbar-btn">Labels</button>
-      </div>
-    </nav>
+    <%= render "layouts/nav" %>
     
     <div id="flash_message">
       <% flash.each do |name, msg| %>
