@@ -37,3 +37,4 @@ gem 'capistrano'
 # gem 'debugger'
 
 gem 'oauth'
+gem 'rails_12factor', group: :production
