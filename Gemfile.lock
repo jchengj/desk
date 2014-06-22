@@ -45,9 +45,9 @@ GEM
       i18n
       rake (>= 10.0.0)
       sshkit (~> 1.3)
-    coffee-rails (3.2.2)
+    coffee-rails (3.2.1)
       coffee-script (>= 2.2.0)
-      railties (~> 3.2.0)
+      railties (~> 3.2.0.beta)
     coffee-script (2.2.0)
       coffee-script-source
       execjs
@@ -112,9 +112,9 @@ GEM
     rdoc (3.12.2)
       json (~> 1.4)
     ref (1.0.5)
-    sass (3.3.8)
-    sass-rails (3.2.6)
-      railties (~> 3.2.0)
+    sass (3.2.13)
+    sass-rails (3.2.3)
+      railties (~> 3.2.0.beta)
       sass (>= 3.1.10)
       tilt (~> 1.3)
     sprockets (2.2.2)
@@ -148,13 +148,14 @@ PLATFORMS
 
 DEPENDENCIES
   capistrano
-  coffee-rails (~> 3.2.1)
+  coffee-rails (= 3.2.1)
   jquery-rails
   less-rails
   oauth
   rails (= 3.2.15)
   rails_12factor
-  sass-rails (~> 3.2.3)
+  sass (= 3.2.13)
+  sass-rails (= 3.2.3)
   therubyracer
   twitter-bootstrap-rails!
   uglifier (>= 1.0.3)
