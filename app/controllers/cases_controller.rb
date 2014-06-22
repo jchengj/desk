@@ -1,5 +1,6 @@
 class CasesController < ApplicationController
   def update
-    respond_with Case.update(params[:labels])
+    Case.update(params[:id], params.select{|k,v| k == "labels"})
+    render :nothing => true
   end
 end

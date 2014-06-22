@@ -7,20 +7,24 @@
         <div class="panel panel-default">
           <div class="panel-heading">
             <h4 class="panel-title">
-              <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+              <a data-toggle="collapse" data-parent="#accordion" href="#case_<%= c.id %>">
                 <%= c.subject %>
               </a>
             </h4>
           </div>
-          <div id="collapseOne" class="panel-collapse collapse in">
+          <div id="case_<%= c.id %>" class="panel-collapse collapse in">
             <div class="panel-body">
               <%= c.blurb %>
-
-              <div class="case_new_label">
-                <%= form_tag case_path(c.id) do %>
-                  <%= select_tag "labels", options_from_collection_for_select(@labels, :name, :name), include_blank: true, class: "case_label_select" %>
-                <% end %>
-              </div>
+              
+              <% labels = available_labels(c.labels) %>
+              <% unless labels.blank? %>
+                <div class="case_new_label">      
+                  <%= form_tag case_path(c.id) do %>
+                    <%= label_tag "labels", "Label: " %>
+                    <%= select_tag "labels", options_from_collection_for_select(labels, :name, :name), include_blank: true, class: "case_label_select" %>
+                  <% end %>
+                </div>
+              <% end %>
 
               <div class="case_labels">
                 <% c.labels.each do |l| %>
