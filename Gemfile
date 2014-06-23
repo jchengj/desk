@@ -20,6 +20,14 @@ group :assets do
   gem "less-rails"
 end
 
+group :development, :test do
+  gem "rspec"
+  gem "rspec-rails"
+  gem "simplecov"
+end
+
+gem "webmock", group: :test
+
 gem 'jquery-rails'
 
 # To use ActiveModel has_secure_password

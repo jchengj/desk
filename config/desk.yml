@@ -5,6 +5,14 @@ development:
   access_token_secret: OMcuAwnaqlia6Zy0KYrdYP6gzkJKdmFvxhdGTIPg
   site: https://joseph.desk.com
   version: 2
+
+test:
+  api_key: kgrISsndhX2cTV2nC4Pg
+  api_secret: RYbrA7Sf85G8bYDSEsdJQtYcrMvu78Mai9zv6FNG
+  access_token: 0wR0DHAa2YT7yuv6vw19
+  access_token_secret: OMcuAwnaqlia6Zy0KYrdYP6gzkJKdmFvxhdGTIPg
+  site: https://joseph.desk.com
+  version: 2
     
 production:
   api_key: kgrISsndhX2cTV2nC4Pg

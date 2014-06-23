@@ -1,4 +1,6 @@
-class Label < DeskApi
+class Label
+  include DeskApi
+  
   GROUP = 3
   PARAM = ["name", "description"]
 

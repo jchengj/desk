@@ -1,4 +1,6 @@
-class Filter < DeskApi
+class Filter
+  include DeskApi
+  
   def id
     @data["_links"]["self"]["href"][/\d+$/]
   end
