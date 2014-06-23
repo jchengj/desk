@@ -58,7 +58,7 @@ module DeskApi
     ###########################################################################  
   
     def patch(path, attributes)
-      resp = token.post(prefix + path, attributes.to_json, HEADERS.merge!({"x-http-method-override" => "PATCH"}))
+      resp = token.post(prefix + path, attributes.to_json, HEADERS.merge({"x-http-method-override" => "PATCH"}))
     
       return false unless SUCCESS_STATUSES.include? resp.code.to_i
       JSON.parse(resp.body)

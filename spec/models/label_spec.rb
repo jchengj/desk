@@ -5,7 +5,7 @@ describe Label do
   LABEL_URL = "https://joseph.desk.com/api/v2/labels"
   LABEL_HEADER = { 'Accept'=>'application/json', 'Content-Type' => 'application/json' }
   
-  before(:each) do
+  before do
     stub_request(:get, LABEL_URL).to_return(body: LABELS_JSON_STRING)
   end
   
