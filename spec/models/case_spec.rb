@@ -2,10 +2,10 @@ require 'spec_helper'
 require 'fixtures/case_helper'
 
 describe Case do
-  GET_CASE_URL = "https://joseph.desk.com/api/v2/filters/2026388/cases"
+  GET_URL = "https://joseph.desk.com/api/v2/filters/2026388/cases"
   
   before do
-    stub_request(:get, GET_CASE_URL).to_return(body: CASES_JSON_STRING)
+    stub_request(:get, GET_URL).to_return(body: CASES_JSON_STRING)
   end
   
   subject { Case }

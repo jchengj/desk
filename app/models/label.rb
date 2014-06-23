@@ -9,7 +9,7 @@ class Label
     return [] if data.blank? || data["_embedded"].blank? || data["_embedded"]["entries"].blank?
 
     results = data["_embedded"]["entries"]
-    results.map {|r| Filter.new(r) }
+    results.map {|r| Label.new(r) }
   end  
   
   def self.create(attributes)
