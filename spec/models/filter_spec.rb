@@ -12,16 +12,16 @@ describe Filter do
   context ".query" do
     before do
       @filters = subject.query()
-    end
+    end 
     
     it "returns all 10 filters" do
-      @filters.class.should == Array
-      @filters.length.should == 10
+      expect(@filters.class).to eq Array
+      expect(@filters.length).to eq 10
     end
     
     it "returns an Array of Case objects" do
-      @filters.each do |c|
-        c.class.should == Filter
+      @filters.each do |f|
+        expect(f.class).to eq Filter
       end
     end
   end
@@ -32,12 +32,12 @@ describe Filter do
     end
     
     it "takes a hash and returns its id via its getter method" do
-      @filter.id.should == "2026388"
+      expect(@filter.id).to eq "2026388"
     end
     
     it "takes a hash and attributes can be accessed via method missing" do
-      @filter.name.should == "Inbox"
-      @filter.active.should == true
+      expect(@filter.name).to eq "Inbox"
+      expect(@filter.active).to eq true
     end
   end
 end

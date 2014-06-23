@@ -4,9 +4,11 @@ require 'fixtures/case_helper'
 describe Case do
   CASE_GET_URL = "https://joseph.desk.com/api/v2/filters/2026388/cases"
   CASE_POST_URL = "https://joseph.desk.com/api/v2/cases/1"
+  CASE_MALFORMED_URL = "https://joseph.desk.com/api/v2/filters/0/cases"
   
   before do
     stub_request(:get, CASE_GET_URL).to_return(body: CASES_JSON_STRING)
+    stub_request(:get, CASE_MALFORMED_URL).to_return(status: 404, body: CASE_JSON_MALFORMED)
   end
   
   subject { Case }
@@ -16,23 +18,29 @@ describe Case do
     end
     
     it "returns all cases for filer 2026388" do
-      @cases.class.should == Array
-      @cases.length.should == 2  
+      expect(@cases.class).to eq Array
+      expect(@cases.length).to eq 2
     end
     
     it "returns an Array of Case objects" do
       @cases.each do |c|
-        c.class.should == Case
+        expect(c.class).to eq Case
       end
+    end
+    
+    it "returns an invalid hash message" do
+      body = subject.query(0)
+
     end
   end
   
   context ".new" do
     it "takes a hash and attributes can be accessed via method missing" do
       c = subject.new(CASE_HASH)
-      c.id.should == 1
-      c.status.should == "open"
-      c.type.should == "email"    
+      
+      expect(c.id).to eq 1
+      expect(c.status).to eq "open"
+      expect(c.type).to eq "email"  
     end
   end
   

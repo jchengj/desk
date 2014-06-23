@@ -12,6 +12,12 @@ module DeskApi
     @data = attributes
   end
   
+  ##########################################################################
+  #
+  # dynamically create all setter methods based on the hash keys stored in @data
+  #
+  ##########################################################################  
+  
   def method_missing(method_sym, *arguments, &block)
     if arguments.blank? || block.blank?
       @data[method_sym.to_s]
@@ -24,16 +30,33 @@ module DeskApi
     HEADERS = { 'Accept'=>'application/json', 'Content-Type' => 'application/json' }
     SUCCESS_STATUSES = [200, 201, 202, 204]
     
+    ##########################################################################
+    #
+    # Decorator method to properly format the json returned from the api call
+    # if the call succeeded (20x)
+    #   it will return true, and intialize either the a single object or an 
+    #   array of objects
+    #
+    # if the call failed
+    #   an ApiError will be raised with the message 
+    #
+    ##########################################################################    
+    
     def request(method, *options)
+      
       resp = send(method, *options)
       body = JSON.parse(resp.body)
       success = SUCCESS_STATUSES.include? resp.code.to_i
       
-      if success && body["_embedded"] && body["_embedded"]["entries"]
+      raise ApiError.new body["message"] unless success
+          
+      if body["_embedded"] && body["_embedded"]["entries"]
         body =  body["_embedded"]["entries"].map{|d| self.new(d) } 
+      else
+        body = self.new(body)
       end
       
-      return success, body
+      return body
     end
     
     ##########################################################################

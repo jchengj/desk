@@ -2,7 +2,6 @@ class User
   include DeskApi
   
   def self.current_user
-    data = get("users/current") || {}
-    User.new(data)
+    request(:get, "users/current")
   end
 end
