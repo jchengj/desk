@@ -24,6 +24,18 @@ module DeskApi
     HEADERS = { 'Accept'=>'application/json', 'Content-Type' => 'application/json' }
     SUCCESS_STATUSES = [200, 201, 202, 204]
     
+    def request(method, *options)
+      resp = send(method, *options)
+      body = JSON.parse(resp.body)
+      success = SUCCESS_STATUSES.include? resp.code.to_i
+      
+      if success && body["_embedded"] && body["_embedded"]["entries"]
+        body =  body["_embedded"]["entries"].map{|d| self.new(d) } 
+      end
+      
+      return success, body
+    end
+    
     ##########################################################################
     #
     # Build the prefix for the request url
@@ -45,9 +57,6 @@ module DeskApi
     ###########################################################################
     def get(path)
       resp = token.get(prefix + path, HEADERS)
-    
-      return false unless SUCCESS_STATUSES.include? resp.code.to_i
-      JSON.parse(resp.body)
     end
 
     ##########################################################################
@@ -59,9 +68,6 @@ module DeskApi
   
     def patch(path, attributes)
       resp = token.post(prefix + path, attributes.to_json, HEADERS.merge({"x-http-method-override" => "PATCH"}))
-    
-      return false unless SUCCESS_STATUSES.include? resp.code.to_i
-      JSON.parse(resp.body)
     end
   
     ##########################################################################
@@ -71,10 +77,7 @@ module DeskApi
     #
     ###########################################################################  
     def post(path, attributes)
-      resp = token.post(prefix + path, attributes.to_json, HEADERS) 
-    
-      return false unless SUCCESS_STATUSES.include? resp.code.to_i
-      JSON.parse(resp.body) 
+      resp = token.post(prefix + path, attributes.to_json, HEADERS)
     end
   
     ##########################################################################

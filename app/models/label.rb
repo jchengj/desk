@@ -5,14 +5,10 @@ class Label
   PARAM = ["name", "description"]
 
   def self.query()
-    data = get("labels")
-    return [] if data.blank? || data["_embedded"].blank? || data["_embedded"]["entries"].blank?
-
-    results = data["_embedded"]["entries"]
-    results.map {|r| Label.new(r) }
+    request(:get, "labels")
   end  
   
   def self.create(attributes)
-    post("labels", attributes)
+    request(:post, "labels", attributes)
   end
 end

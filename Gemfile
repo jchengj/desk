@@ -20,13 +20,14 @@ group :assets do
   gem "less-rails"
 end
 
-group :development, :test do
+group :test do
   gem "rspec"
   gem "rspec-rails"
   gem "simplecov"
+  gem "webmock"
+  gem "capybara"
+  gem "launchy"
 end
-
-gem "webmock", group: :test
 
 gem 'jquery-rails'
 
