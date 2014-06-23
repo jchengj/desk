@@ -2,10 +2,10 @@ require 'spec_helper'
 require 'fixtures/filter_helper'
 
 describe Filter do
-  GET_URL = "https://joseph.desk.com/api/v2/filters"
+  FILTER_URL = "https://joseph.desk.com/api/v2/filters"
   
-  before do
-    stub_request(:get, GET_URL).to_return(body: FILTERS_JSON_STRING)
+  before(:each) do
+    stub_request(:get, FILTER_URL).to_return(body: FILTERS_JSON_STRING)
   end
   
   subject { Filter }

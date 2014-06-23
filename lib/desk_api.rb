@@ -71,7 +71,6 @@ module DeskApi
     #
     ###########################################################################  
     def post(path, attributes)
-      token.post(prefix + path, attr, HEADERS) 
       resp = token.post(prefix + path, attributes.to_json, HEADERS) 
     
       return false unless SUCCESS_STATUSES.include? resp.code.to_i
