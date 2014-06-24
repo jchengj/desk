@@ -31,13 +31,12 @@ Label = {
       .append($template.label({label: $(elem).val()}))
       
     $('option:selected', elem).remove()
-    $('.case_new_label').remove() if $(elem).has('option').length <= 1      
+    $(elem).closest('.case_new_label').remove() if $(elem).children('option').length <= 1      
 }
 
 $ ->
   window.$template = new Template()
   
-
   $(document).ajaxError (event, jqxhr, settings, exception) ->
     $("#flash_message").html($template.error_flash {msg: jqxhr.responseText})
 
