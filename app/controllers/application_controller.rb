@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
   
   def show_error(exception)
     respond_to do |f|
-      f.html { redirect_to "/", :error => exception.message }
+      f.html { redirect_to({action: :index}, flash: {error: exception.message})}
       f.js { render text: exception.message, status: 400 }
     end
   end
