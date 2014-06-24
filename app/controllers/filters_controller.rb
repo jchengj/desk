@@ -14,7 +14,5 @@ class FiltersController < ApplicationController
     @cases = Case.query(params[:id])
     @labels = Label.query()
     session[:filter_id] = params[:id]
-    
-    render :partial => "cases" and return
   end
 end

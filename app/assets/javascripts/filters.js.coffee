@@ -1,11 +1,12 @@
 class Template
   constructor: ->
-    @flash = Handlebars.compile $('#success_message').html()
+    @success_flash = Handlebars.compile $('#success_message').html()
+    @error_flash = Handlebars.compile $('#error_message').html()
     @label = Handlebars.compile $('#append_label').html()
 
 Filter = {
   load_cases : (elem) ->
-    $('#filter_cases').load $(elem).attr('href')
+    $.getScript $(elem).attr('href')
     $('#filters li.active').removeClass("active")
     $(elem).closest("li").addClass("active")
 }
@@ -22,9 +23,8 @@ Label = {
     }
         
   success : (elem) ->
-    $template = new Template()
   
-    $('#flash_message').html($template.flash {msg: "Label added successfully"})
+    $('#flash_message').html($template.success_flash {msg: "Label added successfully"})
     $(elem)
       .closest(".panel-body")
       .find(".case_labels")
@@ -35,6 +35,12 @@ Label = {
 }
 
 $ ->
+  window.$template = new Template()
+  
+
+  $(document).ajaxError (event, jqxhr, settings, exception) ->
+    $("#flash_message").html($template.error_flash {msg: jqxhr.responseText})
+
   $('.filter_link').on 'click', (e)->
     e.preventDefault()
     Filter.load_cases @

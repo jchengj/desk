@@ -18,13 +18,15 @@
     
     <div id="flash_message">
       <% flash.each do |name, msg| %>
-        <div class="alert alert-<%= name == :notice ? "success" : "error" %>">
+        <div class="alert alert-<%= name == :notice ? "success" : "danger" %>">
           <%= msg %>
         </div>
       <% end %>
     </div>
     
     <%= yield %>
+    
+    
     <%= render "layouts/templates"%>
   </div>
 </body>

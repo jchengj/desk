@@ -11,8 +11,8 @@ class ApplicationController < ActionController::Base
   
   def show_error(exception)
     respond_to do |f|
-      format.html { redirect_to "/", :error => exception.message }
-      format.js { json: {message: exception.message}.to_json, status: 400 }
+      f.html { redirect_to "/", :error => exception.message }
+      f.js { render text: exception.message, status: 400 }
     end
   end
 end
