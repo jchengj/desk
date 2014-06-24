@@ -28,9 +28,8 @@ describe Case do
       end
     end
     
-    it "returns an invalid hash message" do
-      body = subject.query(0)
-
+    it "raises an exception" do
+      expect{subject.query(0)}.to raise_error(ApiError)
     end
   end
   

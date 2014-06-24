@@ -25,8 +25,6 @@ group :test do
   gem "rspec-rails"
   gem "simplecov"
   gem "webmock"
-  gem "capybara"
-  gem "launchy"
 end
 
 gem 'jquery-rails'
